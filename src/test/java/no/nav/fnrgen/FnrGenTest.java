@@ -20,15 +20,15 @@ class FnrGenTest {
 
     @Test
     public void twoSeparateInvocationsShouldGiveDifferentFnrs() {
-        String fnr_1 = FnrGen.enkeltFnr();
-        String fnr_2 = FnrGen.enkeltFnr();
+        String fnr_1 = FnrGen.singleFnr();
+        String fnr_2 = FnrGen.singleFnr();
         assertThat(fnr_1).isNotEqualTo(fnr_2);
     }
 
     @Test
     public void shouldSupportGeneratingFromSeedForSingleFnrAsWell() {
         var seed = 12345L;
-        String fnr = FnrGen.enkeltFnr(seed);
+        String fnr = FnrGen.singleFnr(seed);
         assertThat(fnr).isEqualTo("13055530224");
     }
 }

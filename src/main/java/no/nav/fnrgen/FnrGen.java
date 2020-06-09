@@ -23,7 +23,7 @@ public class FnrGen {
 
     /**
      * Generates a stream of valid fnrs from given seed using java.util.Random
-     * @param seed
+     * @param seed - for instantiating random
      * @return a stream of valid fnrs represented as strings
      */
     public static Stream<String> generate(long seed) {
@@ -35,24 +35,24 @@ public class FnrGen {
      * Generates a single valid fnr using the classwide SecureRandom instance
      * @return a valid fnr
      */
-    public static String enkeltFnr() {
+    public static String singleFnr() {
         return generate().findFirst().orElseThrow(() -> new IllegalStateException("Couldn't find a valid fnr"));
     }
 
     /**
      * Generates a single valid fnr using the provided seed for initializing
      * a java.util.Random instance
-     * @param seed
-     * @return
+     * @param seed for instantiating Random
+     * @return single valid fnr
      */
-    public static String enkeltFnr(long seed) {
+    public static String singleFnr(long seed) {
         return generate(seed).findFirst().orElseThrow(() -> new IllegalStateException("Couldn't find a valid fnr"));
     }
 
     private static Stream<Fnr> generate(Random random) {
-        return Stream.generate(() -> enkeltFnr(random)).filter(Fnr::isValid);
+        return Stream.generate(() -> singleFnr(random)).filter(Fnr::isValid);
     }
-    private static Fnr enkeltFnr(Random random) {
+    private static Fnr singleFnr(Random random) {
         Year year = Year.of(START_YEAR + random.nextInt(120));
         Month month = Month.of(random.nextInt(12) + 1);
         int day;

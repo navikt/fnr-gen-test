@@ -26,7 +26,7 @@ To get one fnr call
 ```java
 import no.nav.fnrgen.FnrGen;
 
-FnrGen.enkeltFnr();
+FnrGen.singleFnr();
 ```
 
 To get a stream of fnrs call
