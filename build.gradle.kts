@@ -93,3 +93,8 @@ githubRelease {
     tagName.set("${project.version}")
     releaseAssets.from("build/libs")
 }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_11
+}
