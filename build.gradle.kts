@@ -6,6 +6,7 @@ plugins {
     id("com.jfrog.bintray").version("1.8.5")
     id("maven-publish")
     id("net.researchgate.release").version("2.8.1")
+    id("com.github.breadmoirai.github-release").version("2.2.12")
 }
 
 repositories {
@@ -80,4 +81,14 @@ publishing {
             artifact(sourcesJar.get())
         }
     }
+}
+
+githubRelease {
+    token { githubPassword }
+    owner.set("navikt")
+    targetCommitish.set("${project.version}")
+    body {
+        changelog().call()
+    }
+    releaseAssets.from("build/libs")
 }

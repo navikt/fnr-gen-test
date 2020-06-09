@@ -29,7 +29,7 @@ jobs:
         with:
           java-version: 11
       - name: test and build
-        run: ./gradlew build publish
+        run: ./gradlew build publish githubRelease
         env:
           ORG_GRADLE_PROJECT_githubUser: x-access-token
           ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
