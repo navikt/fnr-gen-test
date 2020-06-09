@@ -26,7 +26,7 @@ jobs:
         with:
           java-version: 11
       - name: test and build
-        run: ./gradlew build
+        run: ./gradlew -Pversion="1.$(git log -1 --pretty='%h')" build publish
         env:
           ORG_GRADLE_PROJECT_githubUser: x-access-token
           ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
