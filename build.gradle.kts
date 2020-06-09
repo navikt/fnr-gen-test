@@ -86,7 +86,7 @@ publishing {
 githubRelease {
     token { githubPassword }
     owner.set("navikt")
-    targetCommitish.set("${project.version}")
+    targetCommitish.set("HEAD")
     body { """
         # Release $version
     """.trimIndent()
