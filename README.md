@@ -16,28 +16,31 @@
 
 ```
 repositories {
-   maven {
-     url "https://maven.pkg.github.com/navikt/fnr-gen-test"
-   }
+     maven { url 'https://jitpack.io' }
 }
-testImplementation "no.nav.test:fnr-gen-test:$version"
+testImplementation "com.github.navikt:fnr-gen-test:$version"
 ```
 
 * maven
 
-```
+```xml
 <repositories>
   <repository>
-     <url>https://maven.pkg.github.com/navikt/fnr-gen-test</url>
-     <name>Nav FNR repo</name>
+    <id>jitpack.io</id>
+  	<url>https://jitpack.io</url>
   </repository>
 </repositories>
-
+...
+<dependencies>
+...
 <dependency>
-    <groupId>no.nav.test</groupId>
+    <groupId>com.github.navikt</groupId>
     <artifactId>fnr-gen-test</artifactId>
     <version>${version}</version>
+    <scope>test</scope>
 </dependency>
+...
+</dependencies>
 ```
 
 * Javacode
