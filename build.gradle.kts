@@ -4,6 +4,7 @@ plugins {
     jacoco
     id("info.solidsoft.pitest").version("1.5.1")
     id("com.jfrog.bintray").version("1.8.5")
+    id("maven-publish")
 }
 
 repositories {
@@ -19,6 +20,11 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
 }
 
+val sourcesJar by tasks.registering(Jar::class) {
+    classifier = "sources"
+    from(sourceSets.main.get().allSource)
+}
+
 val test by tasks.getting(Test::class) {
     useJUnitPlatform()
 }
@@ -27,4 +33,44 @@ pitest {
     //adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
     junit5PluginVersion.set("0.12")
     // ...
+}
+
+val githubUser: String? by project
+val githubPassword: String? by project
+
+publishing {
+    repositories {
+        maven {
+            url = uri("https://maven.pkg.github.com/navikt/fnr-gen-test")
+            credentials {
+                username = githubUser
+                password = githubPassword
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("mavenJava") {
+
+            pom {
+                name.set("fnr-gen-test")
+                description.set("Fnr generator for test")
+                url.set("https://github.com/navikt/fnr-gen-test")
+
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+
+                scm {
+                    connection.set("scm:git:https://github.com/navikt/fnr-gen-test.git")
+                    developerConnection.set("scm:git:https://github.com/navikt/fnr-gen-test.git")
+                    url.set("https://github.com/navikt/fnr-gen-test")
+                }
+            }
+            from(components["java"])
+            artifact(sourcesJar.get())
+        }
+    }
 }
