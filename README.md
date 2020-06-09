@@ -8,7 +8,7 @@
 [![Gradle Status](https://gradleupdate.appspot.com/navikt/fnr-gen-test/status.svg)](https://gradleupdate.appspot.com/navikt/fnr-gen-test/status)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
-![Latest version: ]
+[![](https://jitpack.io/v/navikt/fnr-gen-test.svg)](https://jitpack.io/#navikt/fnr-gen-test)
 
 ## Usage
 
