@@ -35,9 +35,7 @@ val test by tasks.getting(Test::class) {
 
 
 pitest {
-    //adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
     junit5PluginVersion.set("0.12")
-    // ...
 }
 
 val githubUser: String? by project
@@ -79,3 +77,4 @@ publishing {
         }
     }
 }
+

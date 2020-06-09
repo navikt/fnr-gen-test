@@ -26,51 +26,12 @@ jobs:
         with:
           java-version: 11
       - name: test and build
-        run: ./gradlew -Pversion="1.$(git log -1 --pretty='%h')" build publish
+        run: ./gradlew build
         env:
           ORG_GRADLE_PROJECT_githubUser: x-access-token
           ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}
-  release:
-    name: Create Release
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, 'ci skip')
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Set release tag
-        run: |
-          export TAG_NAME="1.$(git log -1 --pretty='%h')"
-          echo "::set-env name=RELEASE_TAG::$TAG_NAME"
-      - name: Set changelog
-        # (Escape newlines see https://github.com/actions/create-release/issues/25)
-        run: |
-          text="$(git --no-pager log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"%h %s")"
-          text="${text//$'%'/%25}"
-          text="${text//$'\n'/%0A}"
-          text="${text//$'\r'/%0D}"
-          echo "::set-env name=CHANGELOG::$text"
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
+      - name: Release
+        run: ./gradlew release -Prelease.useAutomaticVersion=true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          release_name: ${{ env.RELEASE_TAG }}
-          body: |
-            Changes in this Release
-
-            ${{ env.CHANGELOG }}
-          draft: false
-          prerelease: false
-      - name: Upload release artifact
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/libs/fnr-gen-test-${{ env.RELEASE_TAG }}.jar
-          asset_name: fnr-gen-test-${{ env.RELEASE_TAG }}.jar
-          asset_content_type: application/java-archive
+          ORG_GRADLE_PROJECT_githubUser: x-access-token
+          ORG_GRADLE_PROJECT_githubPassword: ${{ secrets.GITHUB_TOKEN }}

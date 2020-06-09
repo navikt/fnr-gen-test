@@ -7,7 +7,7 @@
 * gradle
 
 ```
-testImplementation "no.nav.test.fnr:fnrgen:$version"
+testImplementation "no.nav.test:fnr-gen-test:$version"
 ```
 
 * maven
@@ -15,7 +15,7 @@ testImplementation "no.nav.test.fnr:fnrgen:$version"
 ```
 <dependency>
     <groupId>no.nav.test</groupId>
-    <artifactId>fnrgen</artifactId>
+    <artifactId>fnr-gen-test</artifactId>
     <version>${version}</version>
 </dependency>
 ```
