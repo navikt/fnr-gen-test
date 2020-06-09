@@ -5,6 +5,7 @@ plugins {
     id("info.solidsoft.pitest").version("1.5.1")
     id("com.jfrog.bintray").version("1.8.5")
     id("maven-publish")
+    id("net.researchgate.release").version("2.8.1")
 }
 
 repositories {
@@ -25,9 +26,13 @@ val sourcesJar by tasks.registering(Jar::class) {
     from(sourceSets.main.get().allSource)
 }
 
+val javadocJar by tasks.registering(Javadoc::class) {
+
+}
 val test by tasks.getting(Test::class) {
     useJUnitPlatform()
 }
+
 
 pitest {
     //adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
