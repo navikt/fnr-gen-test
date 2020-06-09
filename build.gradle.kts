@@ -91,7 +91,6 @@ githubRelease {
     """.trimIndent()
     }
     tagName.set("${project.version}")
-    releaseAssets.from("build/libs")
 }
 
 java {
