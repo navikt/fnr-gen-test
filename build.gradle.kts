@@ -81,8 +81,3 @@ publishing {
         }
     }
 }
-
-release {
-    tagTemplate = "v${version}"
-}
-
