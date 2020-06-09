@@ -87,8 +87,9 @@ githubRelease {
     token { githubPassword }
     owner.set("navikt")
     targetCommitish.set("${project.version}")
-    body {
-        changelog().call()
+    body { """
+        # Release $version
+    """.trimIndent()
     }
     releaseAssets.from("build/libs")
 }
