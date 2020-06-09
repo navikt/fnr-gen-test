@@ -33,6 +33,10 @@ val test by tasks.getting(Test::class) {
     useJUnitPlatform()
 }
 
+artifacts {
+    sourcesJar
+    javadocJar
+}
 
 pitest {
     junit5PluginVersion.set("0.12")
