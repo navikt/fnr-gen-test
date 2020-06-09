@@ -1,5 +1,5 @@
-# FnrGen
-
+![Build and deploy](https://github.com/navikt/fnr-gen-test/workflows/Build%20and%20deploy/badge.svg)
+# FnrGen Test Support
 - Easy valid fnr generation for testcode
 
 ## Usage
